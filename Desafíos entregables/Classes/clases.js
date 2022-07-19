@@ -1,9 +1,9 @@
 class Usuario {
-    constructor(nombre, apellido) {
+    constructor(nombre, apellido, libros, mascotas) {
         this.nombre = nombre
         this.apellido = apellido
-        this.libros = []
-        this.mascotas = []
+        this.libros = libros || []
+        this.mascotas = mascotas || []
     }
 
     getFullName() {
@@ -23,11 +23,9 @@ class Usuario {
     }
 
     getBookNames() {
-        const bookNames = []
-        this.libros.forEach(e => {
-            bookNames.push(e.nombre)
+        return this.libros.map(e => {
+            return e.nombre
         })
-        return bookNames
     }
 }
 
