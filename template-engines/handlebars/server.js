@@ -37,11 +37,12 @@ app.get("/products", async (req, res) => {
 })
 
 app.post("/products", async (req, res) => {
-    res.json(await container.save({
+    await container.save({
         name: req.body.name,
         price: req.body.price,
         thumbnail: req.body.thumbnail
-    }))
+    })
+    res.redirect("/products")
 })
 
 server.on("error", error => console.log(`Server error: ${error}`))

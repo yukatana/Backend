@@ -34,5 +34,17 @@
     "price": 30,
     "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Staphylococcus_aureus_bacteria_escape.jpg",
     "id": 7
+  },
+  {
+    "name": "Leptospira interrogans",
+    "price": "20",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Leptospira_interrogans_strain_RGA_01.png",
+    "id": 8
+  },
+  {
+    "name": "Leptospira interrogans",
+    "price": "20",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Leptospira_interrogans_strain_RGA_01.png",
+    "id": 9
   }
 ]
