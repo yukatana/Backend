@@ -1,0 +1,21 @@
+html
+    head
+        title='Product view'
+    body
+        table
+            tr 
+                th Name 
+                th Price
+                th Picture
+            #dataExists
+                if dataExists
+                    each product in item
+                        tr 
+                            td= product.name
+                            td= product.price
+                            td: img(src=product.thumbnail style='height: 100px')
+                else 
+                    td Nothing to see here... Yet!
+
+        a(href="/")
+            button Back to input form 
