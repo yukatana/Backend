@@ -5,10 +5,11 @@ const PORT = 8080
 //EJS import:
 app.set('view engine', 'ejs')
 
-//Container class import to be used by GET /products
-const Container = require("./utils/container")
-const file = "database.json"
-const container = new Container(file)
+//Container class import to be used by GET /products - use MemoryContainer for testing, or FileContainer for database interaction
+
+const MemoryContainer = require("./utils/memory")
+const NAME = "test database"
+const container = new MemoryContainer(NAME)
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());

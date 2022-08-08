@@ -12,11 +12,11 @@ const hbs = handlebars.create({
     partialsDir: __dirname + "/views/partials/"
 })
 
-//Container class import to be used by GET /products
+//Container class import to be used by GET /products - use MemoryContainer for testing, or FileContainer for database interaction
 
-const Container = require("./utils/container")
-const file = "database.json"
-const container = new Container(file)
+const MemoryContainer = require("./utils/memory")
+const NAME = "test database"
+const container = new MemoryContainer(NAME)
 
 app.engine("hbs", hbs.engine)
 
