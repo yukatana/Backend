@@ -22,3 +22,25 @@ form .submit {
 label {
     font-weight: bold;
 }
+
+.table {
+    max-width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+td > img {
+    max-height: 75px;
+}
+
+#chatBox > p {
+    color: green;
+}
+
+p > b {
+    color: blue;
+}
+
+.date {
+    color: brown;
+}

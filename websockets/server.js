@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 
+// Container imports for data persistence in files
 const Container = require('./utils/container')
-const file = 'database.json'
-const container = new Container(file)
+const productsFile = 'database.json'
+const productsContainer = new Container(productsFile)
+const messagesFile = 'messagesFile.json'
+const messagesContainer = new Container(messagesFile)
 
 const {Server: SocketServer} = require('socket.io')
 const {Server: HTTPServer} = require('http')
@@ -18,23 +21,26 @@ app.use(express.static('public'))
 
 socketServer.on('connection', async (socket) => {
     console.log('A new client has connected')
-    let products = await container.getAll()
-    socket.emit('productList', products)
 
+    let products = await productsContainer.getAll()
+    socketServer.emit('PRODUCTS_INIT', products)
 
+    let messages = await messagesContainer.getAll()
+    socketServer.emit('MSGS_INIT', messages)
+
+    socket.on('POST_PRODUCT', async (product) => {
+        await productsContainer.save(product)
+        socketServer.sockets.emit('NEW_PRODUCT', product)
+    })
+
+    socket.on('POST_MESSAGE', async (msg) => {
+        await messagesContainer.save(msg)
+        socketServer.sockets.emit('NEW_MESSAGE', msg)
+    })
 })
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
-})
-
-app.post("/products", async (req, res) => {
-    await container.save({
-        name: req.body.name,
-        price: req.body.price,
-        thumbnail: req.body.thumbnail
-    })
-    res.redirect('/')
 })
 
 const PORT = 8080
