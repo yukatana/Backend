@@ -1,3 +1,5 @@
+//File-based data handling class fit for interacting with databases.
+
 const fs = require("fs")
 
 module.exports = class Container {
