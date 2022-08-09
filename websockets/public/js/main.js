@@ -53,5 +53,6 @@ sendMessage = () => {
     const email = document.getElementById('email').value
     const message = document.getElementById('message').value
     const date = new Date()
-    socket.emit('POST_MESSAGE', {email, date, message})
+    const dateString = `${date.toLocaleString()}`
+    socket.emit('POST_MESSAGE', {email, dateString, message})
 }

@@ -13,6 +13,7 @@ const {Server: HTTPServer} = require('http')
 
 const httpServer = new HTTPServer(app)
 const socketServer = new SocketServer(httpServer)
+const events = require('./socketEvents')
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
@@ -23,19 +24,19 @@ socketServer.on('connection', async (socket) => {
     console.log('A new client has connected')
 
     let products = await productsContainer.getAll()
-    socketServer.emit('PRODUCTS_INIT', products)
+    socketServer.emit(events.PRODUCTS_INIT, products)
 
     let messages = await messagesContainer.getAll()
-    socketServer.emit('MSGS_INIT', messages)
+    socketServer.emit(events.MSGS_INIT, messages)
 
-    socket.on('POST_PRODUCT', async (product) => {
+    socket.on(events.POST_PRODUCT, async (product) => {
         await productsContainer.save(product)
-        socketServer.sockets.emit('NEW_PRODUCT', product)
+        socketServer.sockets.emit(events.NEW_PRODUCT, product)
     })
 
-    socket.on('POST_MESSAGE', async (msg) => {
+    socket.on(events.POST_MESSAGE, async (msg) => {
         await messagesContainer.save(msg)
-        socketServer.sockets.emit('NEW_MESSAGE', msg)
+        socketServer.sockets.emit(events.NEW_MESSAGE, msg)
     })
 })
 
