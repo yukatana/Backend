@@ -1,6 +1,6 @@
-//SQL data handling class fit for interacting with databases - products version.
+//SQL data handling class fit for interacting with databases - messages version.
 
-module.exports = class Container {
+module.exports = class MsgContainer {
 
     constructor(options, tableName) {
         this.options = options
@@ -10,19 +10,15 @@ module.exports = class Container {
     createTable = async () => {
         const knex = require('knex')(this.options)
 
-        try {
-          knex.schema.createTable(this.tableName, (table) => {
-            table.increments('id')
-            table.string('product_name')
-            table.integer('price')
-            table.string('thumbnail')
-      }).finally(() => knex.destroy())  
-        } catch (error) {
-            console.log(error)
-        }
+        knex.schema.createTable(this.tableName, (table) => {
+        table.increments('id')
+        table.string('email')
+        table.integer('dateString')
+        table.string('message')
+      }).finally(() => knex.destroy())
     }
 
-    getAll = async () => { //returns entire array in the file
+    getAll = async () => { //returns all database content
         try {
             const knex = require('knex')(this.options)
 
@@ -30,6 +26,7 @@ module.exports = class Container {
                 .select()
                 .finally(() => knex.destroy())
             return products
+
         } catch (error) {
             console.log(error)
         }
@@ -42,11 +39,13 @@ module.exports = class Container {
             knex(this.tableName)
                 .insert(
                     {
-                        product_name: object.name,
-                        price: object.price,
-                        thumbnail: object.thumbnail
+                        email: object.email,
+                        dateString: object.dateString,
+                        message: object.message
                     }
-                ).finally(() => knex.destroy())
+                )
+                .catch((err) => { console.log(err) })
+                .finally(() => knex.destroy())
         } catch (error) {
             console.log(error)
         }
@@ -56,11 +55,10 @@ module.exports = class Container {
         try {
             const knex = require('knex')(this.options)
 
-            product = await knex.from(this.tableName)
+            message = await knex.from(this.tableName)
                 .select()
                 .where('id', id)
-                .finally(() => knex.destroy())
-            return product
+            return messages
         } catch (error) {
             console.log(error)
             return null

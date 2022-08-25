@@ -3,11 +3,13 @@ const app = express()
 
 // Container imports for data persistence in SQLite database
 const Container = require('./utils/container')
+const MsgContainer = require('./utils/messagesContainer')
 const { options } = require('./options/SQLite3')
+
 const productsContainer = new Container(options, 'products')
 productsContainer.createTable()
 
-const messagesContainer = new Container(options, 'messages')
+const messagesContainer = new MsgContainer(options, 'messages')
 messagesContainer.createTable()
 
 const {Server: SocketServer} = require('socket.io')
