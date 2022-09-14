@@ -1,0 +1,24 @@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Picture</th>
+    </tr>
+    <% if (dataExists) { %>
+        <% item.forEach(product => { %>
+            <tr>
+                <td><%=product.name%></td>
+                <td><%=product.price%></td>
+                <td><img src=<%=product.thumbnail%>  alt="productPicture" style="height: 100px"></td>
+            </tr>
+        <% }) %>
+    <% } else { %>
+        <tr>
+            <td>Nothing to see here... Yet!</td>
+        </tr>
+    <% } %>
+</table>
+
+<a href="/">
+    <button>Back to input form</button>
+</a>
