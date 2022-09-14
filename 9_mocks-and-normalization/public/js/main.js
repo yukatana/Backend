@@ -40,7 +40,7 @@ socket.on('NEW_PRODUCT', (product) => {
 
 socket.on('NEW_MESSAGE', msg => {
     console.log(msg)
-    document.querySelector('#chatBox').append(`<p><b>${msg.author.id}</b> [${msg.dateString}]: ${msg.text}</p>`)
+    document.querySelector('#chatBox').append(`<p><b>${msg.author.id}</b> [${msg.message.dateString}]: ${msg.message.text}</p>`)
 })
 
 postProduct = () => {
@@ -62,5 +62,5 @@ sendMessage = () => {
     const text = document.getElementById('message').value
     const date = new Date()
     const dateString = `${date.toLocaleString()}`
-    socket.emit('POST_MESSAGE', {author, text, dateString})
+    socket.emit('POST_MESSAGE', {author, message: {text, dateString}})
 }
