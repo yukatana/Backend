@@ -4,11 +4,12 @@ const generateProducts = (quantity) => {
     const testProducts = []
     for (let i = 0 ; i < quantity; i++) {
         testProducts.push({
-            name: faker.commerce.product(),
+            product_name: faker.commerce.product(),
             price: faker.commerce.price(0, 10000, 0, '$'),
-            picture: faker.image.food()
+            thumbnail: faker.image.nature(null, null, true)
         })
     }
+    console.log(testProducts)
     return testProducts
 }
 
