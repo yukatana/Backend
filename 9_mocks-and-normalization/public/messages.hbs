@@ -1,6 +1,6 @@
 {{#if messages}}
     {{#each messages}}
-    <p><b>{{this.email}}</b> <span class="date">[{{this.dateString}}]:</span> {{this.message}}</p>
+    <p><b>{{this.author.id}}</b> <span class="date">[{{this.dateString}}]:</span> {{this.text}}</p>
     {{/each}}
 {{else}}
     <p>No messages yet... Why don't you write something?</p>

@@ -17,7 +17,7 @@ const httpServer = new HTTPServer(app)
 const socketServer = new SocketServer(httpServer)
 
 // mongoDB connection
-const connectToMongoDB = require('db/mongoDB')
+const connectToMongoDB = require('./db/mongoDB')
 connectToMongoDB()
     .then(() => console.log('Successfully connected to database.'))
     .catch((err) => console.log(`Could not connect to database. Error: ${err}`))
@@ -52,6 +52,7 @@ socketServer.on('connection', async (socket) => {
     })
 
     socket.on(events.POST_MESSAGE, async (msg) => {
+        console.log(msg)
         await messageContainer.save(msg)
         socketServer.sockets.emit(events.NEW_MESSAGE, msg)
     })

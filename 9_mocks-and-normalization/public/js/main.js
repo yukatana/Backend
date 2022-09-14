@@ -39,20 +39,28 @@ socket.on('NEW_PRODUCT', (product) => {
 })
 
 socket.on('NEW_MESSAGE', msg => {
-    document.querySelector('#chatBox').append(`<p><b>${msg.email}</b> [${msg.date}]: ${msg.message}</p>`)
+    console.log(msg)
+    document.querySelector('#chatBox').append(`<p><b>${msg.author.id}</b> [${msg.dateString}]: ${msg.text}</p>`)
 })
 
 postProduct = () => {
-    const name = document.getElementById('name').value
+    const product_name = document.getElementById('product_name').value
     const price = document.getElementById('price').value
     const thumbnail = document.getElementById('thumbnail').value
-    socket.emit('POST_PRODUCT', {name, price, thumbnail})
+    socket.emit('POST_PRODUCT', {product_name, price, thumbnail})
 }
 
 sendMessage = () => {
-    const email = document.getElementById('email').value
-    const message = document.getElementById('message').value
+    const author = {
+        id: document.getElementById('email').value,
+        name: document.getElementById('name').value,
+        last_name: document.getElementById('last_name').value,
+        age: document.getElementById('age').value,
+        alias: document.getElementById('alias').value,
+        avatar: document.getElementById('alias').value
+    }
+    const text = document.getElementById('message').value
     const date = new Date()
     const dateString = `${date.toLocaleString()}`
-    socket.emit('POST_MESSAGE', {email, dateString, message})
+    socket.emit('POST_MESSAGE', {author, text, dateString})
 }

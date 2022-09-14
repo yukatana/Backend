@@ -9,7 +9,6 @@ const generateProducts = (quantity) => {
             thumbnail: faker.image.nature(null, null, true)
         })
     }
-    console.log(testProducts)
     return testProducts
 }
 
