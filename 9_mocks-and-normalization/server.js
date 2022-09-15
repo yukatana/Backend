@@ -39,8 +39,8 @@ socketServer.on('connection', async (socket) => {
     let products = await productContainer.getAll()
     socketServer.emit(events.PRODUCTS_INIT, products)
 
-    let messages = await messageContainer.getAll()
-    socketServer.emit(events.MSGS_INIT, messages)
+    let normalizedMessages = await messageContainer.getAll()
+    socketServer.emit(events.MSGS_INIT, normalizedMessages)
 
     let testProducts = productGenerator(5)
     socketServer.emit(events.TEST_INIT, testProducts)

@@ -17,15 +17,22 @@ socket.on('PRODUCTS_INIT', (products) => {
         })
 })
 
-socket.on('MSGS_INIT', (messages) => {
-    console.log(messages)
+socket.on('MSGS_INIT', (normalizedMessages) => {
+    console.log(normalizedMessages)
+    const author = new normalizr.schema.Entity('author', {}, {idAttribute: 'email'})
+    const comments = new normalizr.schema.Entity('comment', {
+        author
+    }, {idAttribute: '_id'})
+    const denormalizedMessages = normalizr.denormalize(normalizedMessages.result, [comments], normalizedMessages.entities)
+    const compressionRatio = parseFloat((JSON.stringify(normalizedMessages).length / JSON.stringify(denormalizedMessages).length)*100).toFixed(2)
+    document.querySelector('#ratio').innerHTML = `<h3 class="text-center">Data compression ratio: ${compressionRatio}%</h3>`
     fetch('http://localhost:8080/messages.hbs')
         .then(res => {
             return res.text()
         })
         .then(res => {
             const chatTemplate = Handlebars.compile(res)
-            const chatHTML = chatTemplate({ messages })
+            const chatHTML = chatTemplate({ messages: denormalizedMessages })
             document.querySelector('#chatBox').innerHTML = chatHTML
         })
 })
@@ -40,7 +47,7 @@ socket.on('NEW_PRODUCT', (product) => {
 
 socket.on('NEW_MESSAGE', msg => {
     console.log(msg)
-    document.querySelector('#chatBox').append(`<p><b>${msg.author.id}</b> [${msg.message.dateString}]: ${msg.message.text}</p>`)
+    document.querySelector('#chatBox').append(`<p><b>${msg.author.email}</b> [${msg.dateString}]: ${msg.text}</p>`)
 })
 
 postProduct = () => {
@@ -52,15 +59,15 @@ postProduct = () => {
 
 sendMessage = () => {
     const author = {
-        id: document.getElementById('email').value,
+        email: document.getElementById('email').value,
         name: document.getElementById('name').value,
         last_name: document.getElementById('last_name').value,
         age: document.getElementById('age').value,
         alias: document.getElementById('alias').value,
-        avatar: document.getElementById('alias').value
+        avatar: document.getElementById('avatar').value
     }
     const text = document.getElementById('message').value
     const date = new Date()
     const dateString = `${date.toLocaleString()}`
-    socket.emit('POST_MESSAGE', {author, message: {text, dateString}})
+    socket.emit('POST_MESSAGE', {author, text, dateString})
 }
