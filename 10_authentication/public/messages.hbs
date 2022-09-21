@@ -1,0 +1,10 @@
+{{#if messages}}
+    {{#each messages}}
+    <p>
+        <img src='{{this.author.avatar}}' height="50" width="50"/>
+        <b>{{this.author.email}}</b> <span class="date">[{{this.dateString}}]:</span> {{this.text}}
+    </p>
+    {{/each}}
+{{else}}
+    <p>No messages yet... Why don't you write something?</p>
+{{/if}}

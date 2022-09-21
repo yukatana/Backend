@@ -1,0 +1,24 @@
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Picture</th>
+    </tr>
+    {{#if dataExists}}
+        {{#each item}}
+        <tr>
+            <td>{{this.name}}</td>
+            <td>{{this.price}}</td>
+            <td><img src="{{this.thumbnail}}" alt="productPicture" style="height: 100px"></td>
+        </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+            <td>Nothing to see here... Yet!</td>
+        </tr>
+    {{/if}}
+</table>
+
+<a href="/">
+    <button>Back to input form</button>
+</a>
