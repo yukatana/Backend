@@ -18,14 +18,14 @@ const MemoryContainer = require("./utils/memory")
 const NAME = "test database"
 const container = new MemoryContainer(NAME)
 
-app.engine("hbs", hbs.engine)
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 const server = app.listen(PORT, () => {
     console.log(`Express HTTP server running on port ${PORT}`)
-})
+})app.engine("hbs", hbs.engine)
+
 
 app.get("/", (req, res) => {
     res.render("form.hbs")

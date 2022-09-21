@@ -1,6 +1,15 @@
 const express = require('express')
 const app = express()
 
+//Handlebars import and config
+const handlebars = require("express-handlebars")
+const hbs = handlebars.create({
+    extname: ".hbs",
+    defaultLayout: "index.hbs",
+    layoutsDir: __dirname + "/views/layout",
+    partialsDir: __dirname + "/views/partials/"
+})
+
 // Product generator import for test route
 const productGenerator = require('./utils/productGenerator')
 
@@ -35,7 +44,7 @@ const messageContainer = new MessageContainer(Message)
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.use(express.static('public'))
+app.engine("hbs", hbs.engine)
 
 app.use(cookieParser())
 app.use(session({
@@ -73,13 +82,24 @@ socketServer.on('connection', async (socket) => {
     })
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/public/login.html')
+})
+
+app.post('/login', (req, res) => {
+    req.session.user = req.body.name
+    res.redirect('/')
+})
+
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html')
+    res.render("root.hbs", {user: req.session.user})
 })
 
 app.get('/test-products', (req, res) => {
     res.sendFile(__dirname + '/public/test/test.html')
 })
+
+app.use(express.static('public'))
 
 const PORT = 8080
 httpServer.listen(PORT, () => {
