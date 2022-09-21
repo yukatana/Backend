@@ -50,7 +50,7 @@ app.use(cookieParser())
 app.use(session({
     store: new MongoStore({
         mongoUrl: `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URI}/${process.env.MONGODB_SESSIONS}`,
-        ttl: 60 * 60
+        ttl: 60 * 10
     }),
     secret: 'very_secret',
     resave: true,
@@ -92,7 +92,16 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.render("root.hbs", {user: req.session.user})
+    req.session.user ? res.render("root.hbs", {user: req.session.user}) : res.redirect('/login')
+})
+
+app.post('/logout', (req, res) => {
+    req.session.destroy()
+    res.redirect('/logout')
+})
+
+app.get('/logout', (req, res) => {
+    res.sendFile(__dirname + '/public/logout.html')
 })
 
 app.get('/test-products', (req, res) => {
