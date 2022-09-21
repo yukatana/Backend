@@ -13,6 +13,11 @@ const {Server: SocketServer} = require('socket.io')
 const {Server: HTTPServer} = require('http')
 const events = require('./socketEvents')
 
+// Session, Cookie Parser and Mongo Store imports
+const cookieParser = require('cookie-parser')
+const session = require ('express-session')
+const MongoStore = require('connect-mongo')
+
 const httpServer = new HTTPServer(app)
 const socketServer = new SocketServer(httpServer)
 
@@ -30,8 +35,18 @@ const messageContainer = new MessageContainer(Message)
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-
 app.use(express.static('public'))
+
+app.use(cookieParser())
+app.use(session({
+    store: new MongoStore({
+        mongoUrl: `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URI}/${process.env.MONGODB_SESSIONS}`,
+        ttl: 60 * 60
+    }),
+    secret: 'very_secret',
+    resave: true,
+    saveUninitialized: true
+}))
 
 socketServer.on('connection', async (socket) => {
     console.log('A new client has connected')
