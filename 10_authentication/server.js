@@ -66,9 +66,6 @@ socketServer.on('connection', async (socket) => {
     let normalizedMessages = await messageContainer.getAll()
     socketServer.emit(events.MSGS_INIT, normalizedMessages)
 
-    let testProducts = productGenerator(5)
-    socketServer.emit(events.TEST_INIT, testProducts)
-
     socket.on(events.POST_PRODUCT, async (product) => {
         console.log(product)
         await productContainer.save(product)
@@ -92,7 +89,7 @@ app.post('/login', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    req.session.user ? res.render("root.hbs", {user: req.session.user}) : res.redirect('/login')
+    req.session.user ? res.render('root.hbs', {user: req.session.user}) : res.redirect('/login')
 })
 
 app.post('/logout', (req, res) => {
@@ -105,7 +102,8 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/test-products', (req, res) => {
-    res.sendFile(__dirname + '/public/test/test.html')
+    let testProducts = productGenerator(5)
+    res.render('test.hbs', { products: testProducts })
 })
 
 app.use(express.static('public'))
