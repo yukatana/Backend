@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 
+// HTTP server initialization to be used by websocket
+const {Server: HTTPServer} = require('http')
+const httpServer = new HTTPServer(app)
+
 //Handlebars import and config
 const handlebars = require("express-handlebars")
 const hbs = handlebars.create({
@@ -13,22 +17,12 @@ const hbs = handlebars.create({
 // Product generator import for test route
 const productGenerator = require('./utils/productGenerator')
 
-// Container imports for data persistence in mongoDB
-const ProductContainer = require('./utils/mongoDBProductsContainer')
-const MessageContainer = require('./utils/mongoDBMessagesContainer')
-
-// Server imports for HTTP and Websocket, as well as standardized socket events
-const {Server: SocketServer} = require('socket.io')
-const {Server: HTTPServer} = require('http')
-const events = require('./socketEvents')
-
-// Session, Cookie Parser and Mongo Store imports
+// Session, Passport, Cookie Parser and Mongo Store imports
 const cookieParser = require('cookie-parser')
-const session = require ('express-session')
+const session = require('express-session')
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 const MongoStore = require('connect-mongo')
-
-const httpServer = new HTTPServer(app)
-const socketServer = new SocketServer(httpServer)
 
 // mongoDB connection
 const connectToMongoDB = require('./db/mongoDB')
@@ -36,11 +30,8 @@ connectToMongoDB()
     .then(() => console.log('Successfully connected to database.'))
     .catch((err) => console.log(`Could not connect to database. Error: ${err}`))
 
-// Importing mongoose schemas and container instantiation
-const Product = require('./db/mongoDB/schemas/product')
-const Message = require('./db/mongoDB/schemas/message')
-const productContainer = new ProductContainer(Product)
-const messageContainer = new MessageContainer(Message)
+// Middleware imports
+const checkAuthentication = require('./middlewares/checkAuthentication')
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
@@ -57,27 +48,8 @@ app.use(session({
     saveUninitialized: true
 }))
 
-socketServer.on('connection', async (socket) => {
-    console.log('A new client has connected')
-
-    let products = await productContainer.getAll()
-    socketServer.emit(events.PRODUCTS_INIT, products)
-
-    let normalizedMessages = await messageContainer.getAll()
-    socketServer.emit(events.MSGS_INIT, normalizedMessages)
-
-    socket.on(events.POST_PRODUCT, async (product) => {
-        console.log(product)
-        await productContainer.save(product)
-        socketServer.sockets.emit(events.NEW_PRODUCT, product)
-    })
-
-    socket.on(events.POST_MESSAGE, async (msg) => {
-        console.log(msg)
-        await messageContainer.save(msg)
-        socketServer.sockets.emit(events.NEW_MESSAGE, msg)
-    })
-})
+// Initializing modular websocket listener so as not to clutter this file
+require('./websocket/socketListener')(httpServer)
 
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/public/login.html')
