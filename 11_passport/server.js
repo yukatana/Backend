@@ -80,11 +80,15 @@ app.get('/signup', (req, res) => {
 app.post('/signup', passport.authenticate('signup',
     {failureRedirect: '/signupError'},
     (req, res) => {
-        req.session.user = req.body.user
+        req.session.user = req.user
         res.redirect('/')
         }
     )
 )
+
+app.get('/signupError', (req, res) => {
+    res.sendFile(__dirname + '/public/signupError.html')
+})
 
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/public/login.html')
@@ -93,9 +97,13 @@ app.get('/login', (req, res) => {
 app.post('/login', passport.authenticate('login',
     {failureRedirect: '/loginError'},
     (req, res) => {
-    req.session.user = req.body.user
+    req.session.user = req.user
     res.redirect('/')
 }))
+
+app.get('/loginError', (req, res) => {
+    res.sendFile(__dirname + '/public/loginError.html')
+})
 
 app.get('/', checkAuthentication, (req, res) => {
     res.render('root.hbs', {user: req.session.user})

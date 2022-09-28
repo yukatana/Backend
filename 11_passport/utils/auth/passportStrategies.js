@@ -5,7 +5,7 @@ const loginStrategy = async (username, password, done) => {
     const user = await User.findOne({username})
     const hashedPassword = user.password
     if (!user || !comparePassword(password, hashedPassword)) {
-        return done(null, null, {message: 'Invalid username and/or password. Please try again.'})
+        return done(new Error('Invalid username and/or password. Please try again.'))
     }
     return done(null, user)
 }
