@@ -3,9 +3,9 @@ const { comparePassword, hashPassword } = require('../bcrypt')
 
 const loginStrategy = async (username, password, done) => {
     const user = await User.findOne({username})
-    const hashedPassword = user.password
+    const hashedPassword = user?.password
     if (!user || !comparePassword(password, hashedPassword)) {
-        return done(new Error('Invalid username and/or password. Please try again.'))
+        return done(null, false, {message: 'Invalid username and/or password. Please try again.'})
     }
     return done(null, user)
 }
@@ -13,7 +13,7 @@ const loginStrategy = async (username, password, done) => {
 const signupStrategy = async (req, username, password, done) => {
     const userExists = await User.findOne({ username })
     if (userExists) {
-        return done(new Error('User already exists. Please, register with a different username.'))
+         return done(null, false, {message: 'User already exists. Please, register with a different username.'})
     }
     const hashedPassword = hashPassword(password)
     const user = new User({

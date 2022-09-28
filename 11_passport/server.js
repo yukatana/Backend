@@ -17,9 +17,8 @@ const hbs = handlebars.create({
 // Product generator import for test route
 const productGenerator = require('./utils/productGenerator')
 
-// Session, Passport, Cookie Parser and Mongo Store imports
+// Cookie Parser and Mongo Store imports
 const cookieParser = require('cookie-parser')
-const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
 // mongoDB connection
@@ -31,10 +30,31 @@ connectToMongoDB()
 // Middleware imports
 const checkAuthentication = require('./middlewares/checkAuthentication')
 
+// Passport import, initialization, and configuration
+const session = require('express-session')
+const passport = require('passport')
+const { loginStrategy, signupStrategy } = require('./utils/auth/passportStrategies')
+const LocalStrategy = require('passport-local').Strategy
+passport.use('login', new LocalStrategy(loginStrategy))
+passport.use('signup', new LocalStrategy(
+    {passReqToCallback: true},
+    signupStrategy)
+)
+// Types and User schema to be used by deserialize
+const { Types } = require('mongoose')
+const User = require('./db/mongoDB/schemas/user')
+passport.serializeUser((user, done) => {
+    done(null, user._id)
+})
+passport.deserializeUser(async (id, done) => {
+    id = Types.ObjectId(id)
+    const user = await User.findById(id)
+    done(null, user)
+})
+
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.engine("hbs", hbs.engine)
-
 app.use(cookieParser())
 app.use(session({
     store: new MongoStore({
@@ -45,30 +65,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
-
-// Passport import, initialization, and configuration
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-const { loginStrategy, signupStrategy } = require('./utils/auth/passportStrategies')
 app.use(passport.initialize())
 app.use(passport.session())
-passport.use('login', new LocalStrategy(loginStrategy))
-passport.use('signup', new LocalStrategy(
-    {passReqToCallback: true},
-    signupStrategy)
-)
-
-passport.serializeUser((user, done) => {
-    done(null, user._id)
-})
-// Types and User schema to be used by deserialize
-const { Types } = require('mongoose')
-const User = require('./db/mongoDB/schemas/user')
-passport.deserializeUser(async (id, done) => {
-    id = Types.ObjectId(id)
-    const user = await User.findById(id)
-    done(null, user)
-})
 
 // Initializing modular websocket listener so as not to clutter this file
 require('./websocket/socketListener')(httpServer)
