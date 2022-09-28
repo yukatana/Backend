@@ -58,26 +58,52 @@ passport.use('signup', new LocalStrategy(
     signupStrategy)
 )
 
+passport.serializeUser((user, done) => {
+    done(null, user._id)
+})
+// Types and User schema to be used by deserialize
+const { Types } = require('mongoose')
+const User = require('./db/mongoDB/schemas/user')
+passport.deserializeUser(async (id, done) => {
+    id = Types.ObjectId(id)
+    const user = await User.findById(id)
+    done(null, user)
+})
+
 // Initializing modular websocket listener so as not to clutter this file
 require('./websocket/socketListener')(httpServer)
+
+app.get('/signup', (req, res) => {
+    res.sendFile(__dirname + '/public/signup.html')
+})
+
+app.post('/signup', passport.authenticate('signup',
+    {failureRedirect: '/signupError'},
+    (req, res) => {
+        req.session.user = req.body.user
+        res.redirect('/')
+        }
+    )
+)
 
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + '/public/login.html')
 })
 
-app.post('/login', (req, res) => {
-    req.session.user = req.body.name
+app.post('/login', passport.authenticate('login',
+    {failureRedirect: '/loginError'},
+    (req, res) => {
+    req.session.user = req.body.user
     res.redirect('/')
-})
+}))
 
 app.get('/', checkAuthentication, (req, res) => {
     res.render('root.hbs', {user: req.session.user})
-    //: res.redirect('/login')
 })
 
 app.post('/logout', (req, res) => {
     req.session.destroy()
-    res.redirect('/logout')
+    req.logout(() => res.redirect('/logout'))
 })
 
 app.get('/logout', (req, res) => {

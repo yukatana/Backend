@@ -1,5 +1,5 @@
 const User = require('../../db/mongoDB/schemas/user')
-const {comparePassword} = require('../bcrypt')
+const { comparePassword, hashPassword } = require('../bcrypt')
 
 const loginStrategy = async (username, password, done) => {
     const user = await User.findOne({username})
@@ -11,7 +11,17 @@ const loginStrategy = async (username, password, done) => {
 }
 
 const signupStrategy = async (req, username, password, done) => {
-
+    const userExists = await User.findOne({ username })
+    if (userExists) {
+        return done(new Error('User already exists. Please, register with a different username.'))
+    }
+    const hashedPassword = hashPassword(password)
+    const user = new User({
+        username,
+        password: hashedPassword
+    })
+    await user.save()
+    return done(null, user)
 }
 
 module.exports = {
