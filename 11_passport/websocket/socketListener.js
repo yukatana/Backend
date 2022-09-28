@@ -1,3 +1,5 @@
+// SocketServer and events import
+const {Server: SocketServer} = require("socket.io")
 const events = require("./socketEvents")
 
 // Container imports for data persistence in mongoDB
@@ -7,7 +9,6 @@ const MessageContainer = require('../utils/mongoDBMessagesContainer')
 // Importing mongoose schemas and container instantiation
 const Product = require('../db/mongoDB/schemas/product')
 const Message = require('../db/mongoDB/schemas/message')
-const {Server: SocketServer} = require("socket.io");
 const productContainer = new ProductContainer(Product)
 const messageContainer = new MessageContainer(Message)
 

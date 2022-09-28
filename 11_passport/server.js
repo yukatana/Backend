@@ -20,8 +20,6 @@ const productGenerator = require('./utils/productGenerator')
 // Session, Passport, Cookie Parser and Mongo Store imports
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
 const MongoStore = require('connect-mongo')
 
 // mongoDB connection
@@ -48,6 +46,18 @@ app.use(session({
     saveUninitialized: true
 }))
 
+// Passport import, initialization, and configuration
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
+const { loginStrategy, signupStrategy } = require('./utils/auth/passportStrategies')
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use('login', new LocalStrategy(loginStrategy))
+passport.use('signup', new LocalStrategy(
+    {passReqToCallback: true},
+    signupStrategy)
+)
+
 // Initializing modular websocket listener so as not to clutter this file
 require('./websocket/socketListener')(httpServer)
 
@@ -60,8 +70,9 @@ app.post('/login', (req, res) => {
     res.redirect('/')
 })
 
-app.get('/', (req, res) => {
-    req.session.user ? res.render('root.hbs', {user: req.session.user}) : res.redirect('/login')
+app.get('/', checkAuthentication, (req, res) => {
+    res.render('root.hbs', {user: req.session.user})
+    //: res.redirect('/login')
 })
 
 app.post('/logout', (req, res) => {
