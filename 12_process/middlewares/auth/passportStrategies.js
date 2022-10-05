@@ -1,5 +1,5 @@
 const User = require('../../db/mongoDB/schemas/user')
-const { comparePassword, hashPassword } = require('../bcrypt')
+const { comparePassword, hashPassword } = require('../../utils/bcrypt')
 
 const loginStrategy = async (username, password, done) => {
     const user = await User.findOne({username})

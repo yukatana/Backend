@@ -5,6 +5,9 @@ const app = express()
 const {Server: HTTPServer} = require('http')
 const httpServer = new HTTPServer(app)
 
+// Router imports
+const APIRouter = require('./routes/api/APIRouter')
+
 //Handlebars import and config
 const handlebars = require("express-handlebars")
 const hbs = handlebars.create({
@@ -33,7 +36,7 @@ const checkAuthentication = require('./middlewares/checkAuthentication')
 // Passport import, initialization, and configuration
 const session = require('express-session')
 const passport = require('passport')
-const { loginStrategy, signupStrategy } = require('./utils/auth/passportStrategies')
+const { loginStrategy, signupStrategy } = require('./middlewares/auth/passportStrategies')
 const LocalStrategy = require('passport-local').Strategy
 passport.use('login', new LocalStrategy(loginStrategy))
 passport.use('signup', new LocalStrategy(
@@ -119,6 +122,8 @@ app.get('/test-products', (req, res) => {
     let testProducts = productGenerator(5)
     res.render('test.hbs', { products: testProducts })
 })
+
+app.use('/api', APIRouter)
 
 app.use(express.static('public'))
 
