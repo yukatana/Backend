@@ -1,7 +1,7 @@
 const numberGenerator = require('../utils/numberGenerator')
 
 const generateRandoms = (req, res) => {
-    const result = numberGenerator(req.query.qty || 10e8)
+    const result = numberGenerator(req.query.qty || 1e8)
     return res.send(result)
 }
 

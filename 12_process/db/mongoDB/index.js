@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-require('dotenv').config()
+const config = require('../../config')
 
 connection = async () => {
-    const URIString = `mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_URI}/${process.env.MONGODB_DATABASE}`
+    const URIString = `mongodb+srv://${config.MONGODB_USERNAME}:${config.MONGODB_PASSWORD}@${config.MONGODB_URI}/${config.MONGODB_DATABASE}`
     await mongoose.connect(URIString)
 }
 
