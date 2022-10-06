@@ -11,4 +11,9 @@ const numberGenerator = (qty) => {
     return numbers
 }
 
+process.on('message', (qty) => {
+    const result = numberGenerator(qty)
+    process.send(result)
+})
+
 module.exports = numberGenerator
