@@ -23,6 +23,7 @@ if (MODE === 'cluster' && cluster.isPrimary) {
 } else {
     //Runs express server for every worker that is spawned or just once if we're running on fork mode
     const PORT = config.PORT
+    
     http.listen(PORT, () => {
         console.log(`HTTP server running on port ${PORT}`)
     })
