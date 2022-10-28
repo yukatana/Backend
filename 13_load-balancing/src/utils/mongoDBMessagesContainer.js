@@ -1,6 +1,5 @@
 //mongoDB data persistence class - messages version
 const normalizr = require('normalizr')
-const util = require('util')
 
 module.exports = class mongoDBMessagesContainer {
 
@@ -18,10 +17,6 @@ module.exports = class mongoDBMessagesContainer {
             const comments = new normalizr.schema.Entity('comment', {
                 author
             }, {idAttribute: '_id'})
-            // console.log('--------------------------------------------------')
-            // console.log(util.inspect(_data, false, 5, true))
-            // console.log('--------------------------------------------------')
-            // console.log(util.inspect(normalizedData, false, 5, true))
             return normalizr.normalize(_data, [comments])
         } catch (err) {
             console.error(err)
