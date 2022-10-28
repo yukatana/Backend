@@ -148,3 +148,5 @@ httpServer.listen(PORT, () => {
 })
 
 httpServer.on('error', error => console.log(`Server error: ${error}`))
+
+module.exports = app
