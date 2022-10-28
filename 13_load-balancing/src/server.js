@@ -140,7 +140,7 @@ app.get('/info', (req, res) => {
 
 app.use('/api', APIRouter)
 
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'))
 
 const PORT = config.PORT
 httpServer.listen(PORT, () => {
