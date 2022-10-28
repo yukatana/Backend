@@ -1,7 +1,13 @@
 const { MODE } = require('../src/config')
 const cluster = require('cluster')
 const { cpus } = require('os')
+const config = require("../src/config")
 const app = require('../src/server')
+const { Server } = require('http')
+const http = new Server(app)
+
+// Initializing modular websocket listener with http server as argument
+require('../src/websocket/socketListener')(http)
 
 if (MODE === 'cluster' && cluster.isPrimary) {
     console.log(`Started master process with PID: ${process.pid}`)
@@ -16,5 +22,10 @@ if (MODE === 'cluster' && cluster.isPrimary) {
     })
 } else {
     //Runs express server for every worker that is spawned or just once if we're running on fork mode
-    app
+    const PORT = config.PORT
+    http.listen(PORT, () => {
+        console.log(`HTTP server running on port ${PORT}`)
+    })
+
+    http.on('error', error => console.log(`HTTP server error: ${error}`))
 }

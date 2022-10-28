@@ -2,10 +2,6 @@ const express = require('express')
 const app = express()
 const config = require('./config')
 
-// HTTP server initialization to be used by websocket
-const {Server: HTTPServer} = require('http')
-const httpServer = new HTTPServer(app)
-
 // Router imports
 const APIRouter = require('./routes/api/APIRouter')
 
@@ -71,9 +67,6 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
-// Initializing modular websocket listener so as not to clutter this file
-require('./websocket/socketListener')(httpServer)
 
 app.get('/signup', (req, res) => {
     res.sendFile(__dirname + '/public/signup.html')
@@ -141,12 +134,5 @@ app.get('/info', (req, res) => {
 app.use('/api', APIRouter)
 
 app.use(express.static(__dirname + '/public'))
-
-const PORT = config.PORT
-httpServer.listen(PORT, () => {
-    console.log(`HTTP server running on port ${PORT}`)
-})
-
-httpServer.on('error', error => console.log(`Server error: ${error}`))
 
 module.exports = app
