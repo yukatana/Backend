@@ -10,8 +10,8 @@ const handlebars = require("express-handlebars")
 const hbs = handlebars.create({
     extname: ".hbs",
     defaultLayout: "index.hbs",
-    layoutsDir: __dirname + "/views/layout",
-    partialsDir: __dirname + "/views/partials/"
+    layoutsDir: "./src/views/layout",
+    partialsDir: "./src/views/partials/"
 })
 
 // Product generator import for test route

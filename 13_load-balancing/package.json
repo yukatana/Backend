@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start":  "nodemon bin/run.js",
-    "dev": "nodemon src/server.js",
+    "start":  "node bin/run.js",
+    "dev": "nodemon bin/run.js",
     "pm2-fork" : "pm2 start bin/run.js --watch",
     "pm2-cluster": "pm2 start bin/run.js --watch -i max"
   },
