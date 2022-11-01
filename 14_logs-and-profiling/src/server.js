@@ -140,11 +140,11 @@ app.get('/info', (req, res) => {
 
 app.use('/api', APIRouter)
 
+app.use(express.static(__dirname + '/public'))
+
 //Warn logger middleware records all wrong-path requests to logs/warn.log file
 app.get('*', warningLogger, (req, res) => {
     res.status(404).send({error: '404 error - not found.'})
 })
-
-app.use(express.static(__dirname + '/public'))
 
 module.exports = app
