@@ -1,10 +1,11 @@
 //Winston log config import
 const { infoLogger, warningLogger } = require('../logs')
 
-//Express import and config
+//Express and compression middleware import and config
 const express = require('express')
 const app = express()
 const config = require('./config')
+const compression = require('compression')
 
 // Router imports
 const APIRouter = require('./routes/api/APIRouter')
@@ -14,8 +15,8 @@ const handlebars = require("express-handlebars")
 const hbs = handlebars.create({
     extname: ".hbs",
     defaultLayout: "index.hbs",
-    layoutsDir: "./src/views/layout",
-    partialsDir: "./src/views/partials/"
+    layoutsDir: "./views/layout",
+    partialsDir: "./views/partials/"
 })
 
 // Product generator import for test route
@@ -124,7 +125,7 @@ app.get('/test-products', (req, res) => {
     res.render('test.hbs', { products: testProducts })
 })
 
-app.get('/info', (req, res) => {
+app.get('/info', compression(), (req, res) => {
     const processInfo = {
         args: process.argv.splice(2),
         path: process.cwd(),
