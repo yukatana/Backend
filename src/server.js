@@ -81,10 +81,10 @@ app.get('/signup', (req, res) => {
 })
 
 app.post('/signup', passport.authenticate('signup',
-    {failureRedirect: `https://websocket-app-coder.herokuapp.com/signupError`}),
+    {failureRedirect: `/signupError`}),
     (req, res) => {
         req.session.user = req.user.username
-        res.redirect(`https://websocket-app-coder.herokuapp.com/`)
+        res.redirect(`/`)
         }
 )
 
@@ -97,7 +97,7 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', passport.authenticate('login',
-    {failureRedirect: `https://websocket-app-coder.herokuapp.com/loginError`}),
+    {failureRedirect: `/loginError`}),
     (req, res) => {
         req.session.user = req.user.username
         res.redirect('/')
@@ -113,7 +113,7 @@ app.get('/', checkAuthentication, (req, res) => {
 
 app.post('/logout', (req, res) => {
     req.session.destroy()
-    req.logout(() => res.redirect(`https://websocket-app-coder.herokuapp.com/logout`))
+    req.logout(() => res.redirect(`/logout`))
 })
 
 app.get('/logout', (req, res) => {
