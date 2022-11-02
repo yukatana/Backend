@@ -22,7 +22,7 @@ if (MODE === 'cluster' && cluster.isPrimary) {
     })
 } else {
     //Runs express server for every worker that is spawned or just once if we're running on fork mode
-    //process.env.PORT necessary for Heroku deployment
+    //process.env.PORT necessary for Heroku deployment's port binding
     const PORT = process.env.PORT || config.PORT
 
     http.listen(PORT, () => {
