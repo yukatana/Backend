@@ -136,6 +136,7 @@ app.get('/info', compression(), (req, res) => {
         folder: __dirname,
         memory: `${process.memoryUsage().rss/1e6} MB`
     }
+    //console.log(processInfo)
     res.render('info.hbs', processInfo)
 })
 

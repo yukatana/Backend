@@ -6,8 +6,13 @@
   "scripts": {
     "start": "node bin/run.js",
     "dev": "nodemon bin/run.js",
-    "pm2-fork": "pm2 start bin/run.js --watch",
-    "pm2-cluster": "pm2 start bin/run.js --watch -i max"
+    "pm2-fork": "pm2 start bin/run.js -name server1 --watch",
+    "pm2-cluster": "pm2 start bin/run.js --watch -i max",
+    "0x": "0x bin/run.js",
+    "prof": "node --prof bin/run.js",
+    "inspect": "node --inspect bin/run.js",
+    "autocannon": "autocannon http://localhost:8080/info -c 100 -d 20",
+    "artillery": "artillery quick --count 50 -n 20 http://localhost:8080/info > artillery_result_with_log.txt"
   },
   "keywords": [],
   "author": "",
