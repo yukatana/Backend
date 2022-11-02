@@ -81,10 +81,10 @@ app.get('/signup', (req, res) => {
 })
 
 app.post('/signup', passport.authenticate('signup',
-    {failureRedirect: '/signupError'}),
+    {failureRedirect: `https://${req.headers.host}/signupError`}),
     (req, res) => {
         req.session.user = req.user.username
-        res.redirect('/')
+        res.redirect(`https://${req.headers.host}/`)
         }
 )
 
@@ -97,7 +97,7 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', passport.authenticate('login',
-    {failureRedirect: '/loginError'}),
+    {failureRedirect: `https://${req.headers.host}/loginError`}),
     (req, res) => {
         req.session.user = req.user.username
         res.redirect('/')
@@ -113,7 +113,7 @@ app.get('/', checkAuthentication, (req, res) => {
 
 app.post('/logout', (req, res) => {
     req.session.destroy()
-    req.logout(() => res.redirect('/logout'))
+    req.logout(() => res.redirect(`https://${req.headers.host}/logout`))
 })
 
 app.get('/logout', (req, res) => {
