@@ -1,5 +1,6 @@
 //mongoDB data persistence class - messages version
 const normalizr = require('normalizr')
+const logger = require('../../logs')
 
 module.exports = class mongoDBMessagesContainer {
 
@@ -19,7 +20,7 @@ module.exports = class mongoDBMessagesContainer {
             }, {idAttribute: '_id'})
             return normalizr.normalize(_data, [comments])
         } catch (err) {
-            console.error(err)
+            logger.error(err)
         }
     }
 
@@ -27,7 +28,7 @@ module.exports = class mongoDBMessagesContainer {
         try {
             return await new this.Schema(commentObject).save()
         } catch (err) {
-            console.log(err)
+            logger.error(err)
         }
     }
 }

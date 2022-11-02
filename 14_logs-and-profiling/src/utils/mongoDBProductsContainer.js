@@ -1,4 +1,5 @@
 //mongoDB data persistence class - products version
+const logger = require('../../logs')
 
 module.exports = class mongoDBProductsContainer {
 
@@ -10,7 +11,7 @@ module.exports = class mongoDBProductsContainer {
         try {
             return await this.Schema.find()
         } catch (err) {
-            console.error(err)
+            logger.error(err)
         }
     }
 
@@ -18,7 +19,7 @@ module.exports = class mongoDBProductsContainer {
         try {
             return await new this.Schema(object).save()
         } catch (err) {
-            console.log(err)
+            logger.error(err)
         }
     }
 }

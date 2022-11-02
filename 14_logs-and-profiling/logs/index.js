@@ -22,6 +22,7 @@ const warningLogger = (req, res, next) => {
 }
 
 module.exports = {
+    logger,
     infoLogger,
     warningLogger
 }
