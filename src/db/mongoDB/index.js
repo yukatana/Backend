@@ -14,7 +14,7 @@ class MongoDBConnection {
                 return this.connection
             } catch (err) {
                 logger.error(err)
-                return false
+                return err
             }
         } else {
             return this.connection
