@@ -2,14 +2,14 @@
 >forever start bin/run.js --watch
 
 # To start the server in fork mode using pm2:  
->pm2 start server.js --name="[servername]" -- [PORT]  
+>pm2 start app.js --name="[servername]" -- [PORT]  
 #### For example:  
->pm2 start server.js --name="server1" --watch -- 8081
+>pm2 start app.js --name="server1" --watch -- 8081
 
 # To start the server in cluster mode using pm2:  
->pm2 start server.js --name="[servername]" --watch -i max -- [PORT]  
+>pm2 start app.js --name="[servername]" --watch -i max -- [PORT]  
 #### For example:  
->pm2 start server.js --name="server2" --watch -i max -- 8082
+>pm2 start app.js --name="server2" --watch -i max -- 8082
 
 # As npm scripts:  
 ### Fork mode:

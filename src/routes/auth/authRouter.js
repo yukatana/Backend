@@ -4,33 +4,20 @@ const authController = require('../../controllers/authController')
 const { passportLogin, passportSignup } = require('../../middlewares/auth/passport')
 
 //GET login page
-authRouter.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/public/login.html')
-})
+authRouter.get('/login', authController.serveLogin)
 // POST a login attempt
-authRouter.post('/login', passportLogin,
-    (req, res) => {
-        req.session.user = req.user.username
-        res.redirect('/')
-    })
+authRouter.post('/login', passportLogin, authController.postLogin)
 // GET login error page
-authRouter.get('/login/error', (req, res) => {
-    res.sendFile(__dirname + '/public/loginError.html')
-})
+authRouter.get('/login/error', authController.getLoginError )
 // GET signup page
-authRouter.get('/signup', (req, res) => {
-    res.sendFile(__dirname + '/public/signup.html')
-})
+authRouter.get('/signup', authController.serveSignup)
 // POST a signup attempt
-authRouter.post('/signup', passportSignup,
-    (req, res) => {
-        req.session.user = req.user.username
-        res.redirect('/')
-    }
-)
+authRouter.post('/signup', passportSignup, authController.trySignup)
 // GET signup error page
-authRouter.get('/signup/error', (req, res) => {
-    res.sendFile(__dirname + '/public/signupError.html')
-})
+authRouter.get('/signup/error', authController.serveSignupError)
+// POST a logout attempt
+authRouter.post('/logout', authController.tryLogout)
+// GET logout page
+authRouter.get('/logout', authController.serveLogout)
 
 module.exports = authRouter

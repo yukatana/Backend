@@ -2,7 +2,7 @@
   "name": "refactored-socket-server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "node bin/run.js",
     "dev": "nodemon bin/run.js",
