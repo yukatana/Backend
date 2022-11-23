@@ -1,25 +1,8 @@
 //Express and compression middleware import and config
 const express = require('express')
 const app = express()
-const compression = require('compression')
 const cookieParser = require('cookie-parser')
 const { infoLogger, warningLogger } = require('../logs')
-
-// Router imports
-const APIRouter = require('./routes/api/APIRouter')
-const authRouter = require('./routes/auth/authRouter')
-
-//Handlebars import and config
-const handlebars = require("express-handlebars")
-const hbs = handlebars.create({
-    extname: ".hbs",
-    defaultLayout: "index.hbs",
-    layoutsDir: "./views/layout",
-    partialsDir: "./views/partials/"
-})
-
-// Product generator import for test route
-const productGenerator = require('./utils/productGenerator')
 
 // mongoDB connection
 const MongoDBConnection = require('./db/mongoDB')
@@ -37,41 +20,28 @@ const { passport } = require('./middlewares/auth/passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
+// General middlewares
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cookieParser())
 app.use(infoLogger) //Winston-based middleware logs all incoming requests to console
 
+// Handlebars config import
+const hbs = require('../views')
+app.engine('hbs', hbs.engine)
 
-app.engine("hbs", hbs.engine)
-
-app.get('/', checkAuthentication, (req, res) => {
-    res.render('root.hbs', {user: req.session.user})
-})
-
-app.get('/test-products', (req, res) => {
-    let testProducts = productGenerator(5)
-    res.render('test.hbs', { products: testProducts })
-})
-
-app.get('/info', compression(), (req, res) => {
-    const processInfo = {
-        args: process.argv.splice(2),
-        path: process.cwd(),
-        operatingSystem: process.platform,
-        processId: process.pid,
-        title: process.title,
-        nodeVersion: process.version,
-        folder: __dirname,
-        memory: `${process.memoryUsage().rss/1e6} MB`
-    }
-    //console.log(processInfo)
-    res.render('info.hbs', processInfo)
-})
-
+// Router imports
+const homeRouter = require('./routes/home/homeRouter')
+const APIRouter = require('./routes/api/APIRouter')
+const authRouter = require('./routes/auth/authRouter')
+const testRouter = require('./routes/test/testRouter')
+const infoRouter = require('./routes/info/infoRouter')
+// Router implementation
+app.use('/', homeRouter)
 app.use('/api', APIRouter)
 app.use('/auth', authRouter)
-
+app.use('/test', testRouter)
+app.use('/info', infoRouter)
 app.use(express.static(__dirname + '/public'))
 
 //Warn logger middleware records all wrong-path requests to logs/warn.log file
