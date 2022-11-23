@@ -1,35 +1,34 @@
 const { Router } = require('express')
 const authRouter = Router()
 const authController = require('../../controllers/authController')
-const passport = require("passport");
+const { passportLogin, passportSignup } = require('../../middlewares/auth/passport')
 
-app.get('/login', (req, res) => {
+//GET login page
+authRouter.get('/login', (req, res) => {
     res.sendFile(__dirname + '/public/login.html')
 })
-
-app.post('/login', passport.authenticate('login',
-        {failureRedirect: '/loginError'}),
+// POST a login attempt
+authRouter.post('/login', passportLogin,
     (req, res) => {
         req.session.user = req.user.username
         res.redirect('/')
     })
-
-app.get('/login/error', (req, res) => {
+// GET login error page
+authRouter.get('/login/error', (req, res) => {
     res.sendFile(__dirname + '/public/loginError.html')
 })
-
+// GET signup page
 authRouter.get('/signup', (req, res) => {
     res.sendFile(__dirname + '/public/signup.html')
 })
-
-authRouter.post('/signup', passport.authenticate('signup',
-        {failureRedirect: '/signupError'}),
+// POST a signup attempt
+authRouter.post('/signup', passportSignup,
     (req, res) => {
         req.session.user = req.user.username
         res.redirect('/')
     }
 )
-
+// GET signup error page
 authRouter.get('/signup/error', (req, res) => {
     res.sendFile(__dirname + '/public/signupError.html')
 })

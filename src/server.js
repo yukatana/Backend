@@ -4,11 +4,11 @@ const { infoLogger, warningLogger } = require('../logs')
 //Express and compression middleware import and config
 const express = require('express')
 const app = express()
-const config = require('./config')
 const compression = require('compression')
 
 // Router imports
 const APIRouter = require('./routes/api/APIRouter')
+const authRouter = require('./routes/auth/authRouter')
 
 //Handlebars import and config
 const handlebars = require("express-handlebars")
@@ -24,7 +24,6 @@ const productGenerator = require('./utils/productGenerator')
 
 // Cookie Parser and Mongo Store imports
 const cookieParser = require('cookie-parser')
-const MongoStore = require('connect-mongo')
 
 // mongoDB connection
 const connectToMongoDB = require('./db/mongoDB')
@@ -32,92 +31,27 @@ connectToMongoDB()
     .then(() => console.log('Successfully connected to database.'))
     .catch((err) => console.log(`Could not connect to database. Error: ${err}`))
 
-// Middleware imports
-const checkAuthentication = require('./middlewares/checkAuthentication')
-
-// Passport import, initialization, and configuration
+// Session import
 const session = require('express-session')
-const passport = require('passport')
-const { loginStrategy, signupStrategy } = require('./middlewares/auth/passportStrategies')
-const LocalStrategy = require('passport-local').Strategy
-passport.use('login', new LocalStrategy(loginStrategy))
-passport.use('signup', new LocalStrategy(
-    {passReqToCallback: true},
-    signupStrategy)
-)
-// Types and User schema to be used by deserialize
-const { Types } = require('mongoose')
-const User = require('./db/mongoDB/schemas/user')
-passport.serializeUser((user, done) => {
-    done(null, user._id)
-})
-passport.deserializeUser(async (id, done) => {
-    id = Types.ObjectId(id)
-    const user = await User.findById(id)
-    done(null, user)
-})
+const sessionConfig = require('./middlewares/sessions/sessionConfig')
+app.use(session(sessionConfig))
+
+// Passport import
+const { passport } = require('./middlewares/auth/passport')
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
-app.engine("hbs", hbs.engine)
 app.use(cookieParser())
-app.use(session({
-    store: new MongoStore({
-        mongoUrl: `mongodb+srv://${config.MONGODB_USERNAME}:${config.MONGODB_PASSWORD}@${config.MONGODB_URI}/${config.MONGODB_SESSIONS}`,
-        ttl: 60 * 10
-    }),
-    secret: 'very_secret',
-    resave: true,
-    saveUninitialized: true
-}))
-app.use(passport.initialize())
-app.use(passport.session())
+
+app.engine("hbs", hbs.engine)
 
 //Winston-based middleware logs all incoming requests to console
 app.use(infoLogger)
 
-app.get('/signup', (req, res) => {
-    res.sendFile(__dirname + '/public/signup.html')
-})
-
-app.post('/signup', passport.authenticate('signup',
-    {failureRedirect: '/signupError'}),
-    (req, res) => {
-        req.session.user = req.user.username
-        res.redirect('/')
-        }
-)
-
-app.get('/signupError', (req, res) => {
-    res.sendFile(__dirname + '/public/signupError.html')
-})
-
-app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/public/login.html')
-})
-
-app.post('/login', passport.authenticate('login',
-    {failureRedirect: '/loginError'}),
-    (req, res) => {
-        req.session.user = req.user.username
-        res.redirect('/')
-})
-
-app.get('/loginError', (req, res) => {
-    res.sendFile(__dirname + '/public/loginError.html')
-})
-
 app.get('/', checkAuthentication, (req, res) => {
     res.render('root.hbs', {user: req.session.user})
-})
-
-app.post('/logout', (req, res) => {
-    req.session.destroy()
-    req.logout(() => res.redirect('/logout'))
-})
-
-app.get('/logout', (req, res) => {
-    res.sendFile(__dirname + '/public/logout.html')
 })
 
 app.get('/test-products', (req, res) => {
@@ -141,6 +75,7 @@ app.get('/info', compression(), (req, res) => {
 })
 
 app.use('/api', APIRouter)
+app.use('/auth', authRouter)
 
 app.use(express.static(__dirname + '/public'))
 

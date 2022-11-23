@@ -16,9 +16,10 @@ const args = require('yargs')(process.argv.slice(2))
 const MONGODB_USERNAME = process.env.MONGODB_USERNAME
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD
 const MONGODB_URI = process.env.MONGODB_URI
-const MONGODB_DATABASE = 'socketServer'
-const MONGODB_SESSIONS = 'sessions'
-const PORT = args.port
+const MONGODB_DATABASE = process.env.MONGODB_DATABASE
+const MONGODB_SESSIONS = process.env.MONGODB_SESSIONS
+const SESSION_SECRET = process.env.SESSION_SECRET
+const PORT = process.env.PORT || args.port
 const MODE = args.mode
 
 module.exports = {
@@ -27,6 +28,7 @@ module.exports = {
     MONGODB_URI,
     MONGODB_DATABASE,
     MONGODB_SESSIONS,
+    SESSION_SECRET,
     PORT,
     MODE
 }
