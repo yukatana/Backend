@@ -1,5 +1,5 @@
 const serveLogin = (req, res) => {
-    res.sendFile(__dirname + '/public/login.html')
+    res.sendFile(process.cwd() + '/public/login.html')
 }
 
 const postLogin = (req, res) => {
@@ -8,11 +8,11 @@ const postLogin = (req, res) => {
 }
 
 const getLoginError = (req, res) => {
-    res.sendFile(__dirname + '/public/loginError.html')
+    res.sendFile(process.cwd() + '/public/loginError.html')
 }
 
 const serveSignup = (req, res) => {
-    res.sendFile(__dirname + '/public/signup.html')
+    res.sendFile(process.cwd() + '/public/signup.html')
 }
 
 const trySignup = (req, res) => {
@@ -21,16 +21,16 @@ const trySignup = (req, res) => {
 }
 
 const serveSignupError = (req, res) => {
-    res.sendFile(__dirname + '/public/signupError.html')
+    res.sendFile(process.cwd() + '/public/signupError.html')
 }
 
 const tryLogout = (req, res) => {
     req.session.destroy()
-    req.logout(() => res.redirect('/logout'))
+    req.logout(() => res.redirect('/auth/logout'))
 }
 
 const serveLogout = (req, res) => {
-    res.sendFile(__dirname + '/public/logout.html')
+    res.sendFile(process.cwd() + '/public/logout.html')
 }
 
 module.exports = {

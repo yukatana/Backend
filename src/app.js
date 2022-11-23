@@ -42,7 +42,7 @@ app.use('/api', APIRouter)
 app.use('/auth', authRouter)
 app.use('/test', testRouter)
 app.use('/info', infoRouter)
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(process.cwd() + '/public'))
 
 //Warn logger middleware records all wrong-path requests to logs/warn.log file
 app.get('*', warningLogger, (req, res) => {
