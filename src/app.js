@@ -1,10 +1,9 @@
-//Winston log config import
-const { infoLogger, warningLogger } = require('../logs')
-
 //Express and compression middleware import and config
 const express = require('express')
 const app = express()
 const compression = require('compression')
+const cookieParser = require('cookie-parser')
+const { infoLogger, warningLogger } = require('../logs')
 
 // Router imports
 const APIRouter = require('./routes/api/APIRouter')
@@ -22,12 +21,9 @@ const hbs = handlebars.create({
 // Product generator import for test route
 const productGenerator = require('./utils/productGenerator')
 
-// Cookie Parser and Mongo Store imports
-const cookieParser = require('cookie-parser')
-
 // mongoDB connection
-const connectToMongoDB = require('./db/mongoDB')
-connectToMongoDB()
+const MongoDBConnection = require('./db/mongoDB')
+MongoDBConnection.connect()
     .then(() => console.log('Successfully connected to database.'))
     .catch((err) => console.log(`Could not connect to database. Error: ${err}`))
 
@@ -44,11 +40,10 @@ app.use(passport.session())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cookieParser())
+app.use(infoLogger) //Winston-based middleware logs all incoming requests to console
+
 
 app.engine("hbs", hbs.engine)
-
-//Winston-based middleware logs all incoming requests to console
-app.use(infoLogger)
 
 app.get('/', checkAuthentication, (req, res) => {
     res.render('root.hbs', {user: req.session.user})

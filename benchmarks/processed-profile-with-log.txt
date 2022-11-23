@@ -59,7 +59,7 @@ Statistical profiling result from isolate-000001864DDC6840-19652-v8.log, (5753 t
       1    0.0%    1.7%  Function: ^append node:internal/linkedlist:30:16
       1    0.0%    1.7%  Function: ^Long.compare C:\Users\raranguren\Desktop\backend-portfolio\14_logs-and-profiling\node_modules\bson\lib\long.js:291:39
       1    0.0%    1.7%  Function: ^Hmac node:internal/crypto/hash:131:14
-      1    0.0%    1.7%  Function: ^<anonymous> C:\Users\raranguren\Desktop\backend-portfolio\14_logs-and-profiling\node_modules\mongodb\lib\sdam\server.js:204:42
+      1    0.0%    1.7%  Function: ^<anonymous> C:\Users\raranguren\Desktop\backend-portfolio\14_logs-and-profiling\node_modules\mongodb\lib\sdam\app.js:204:42
 
  [C++]:
    ticks  total  nonlib   name
