@@ -13,6 +13,8 @@ const args = require('yargs')(process.argv.slice(2))
     })
     .argv
 
+const PRODUCT_PERSISTENCE = process.env.PRODUCT_PERSISTENCE
+const MESSAGE_PERSISTENCE = process.env.MESSAGE_PERSISTENCE
 const MONGODB_USERNAME = process.env.MONGODB_USERNAME
 const MONGODB_PASSWORD = process.env.MONGODB_PASSWORD
 const MONGODB_URI = process.env.MONGODB_URI
@@ -23,6 +25,8 @@ const PORT = process.env.PORT || args.port
 const MODE = args.mode
 
 module.exports = {
+    PRODUCT_PERSISTENCE,
+    MESSAGE_PERSISTENCE,
     MONGODB_USERNAME,
     MONGODB_PASSWORD,
     MONGODB_URI,
