@@ -1,6 +1,6 @@
 const normalizr = require('normalizr')
 
-class messagesRepository {
+class MessageRepository {
     static processAllMessages = (data) => {
         const _data = data.map(msg => {
             return {...msg._doc, _id: msg._id.toString()}
@@ -12,3 +12,5 @@ class messagesRepository {
         return normalizr.normalize(_data, [comments])
     }
 }
+
+module.exports = MessageRepository

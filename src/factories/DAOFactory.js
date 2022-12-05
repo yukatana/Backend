@@ -5,21 +5,19 @@ class DAOFactory {
 
     constructor() {}
 
-    static getProductDAO = (ProductSchema) => {
+    static getProductDAO = () => {
         switch (config.PRODUCT_PERSISTENCE) {
             case 'MongoDB':
-                const MongoDBDAO = require('../DAOs/MongoDBDAO')
-                return new MongoDBDAO(ProductSchema)
+                return require('../DAOs/MongoDBDAO')
             default:
                 logger.error(`Fatal error: please adjust PRODUCT_PERSISTENCE environment variable to match a supported persistence mechanism.`)
         }
     }
 
-    static getMessageDAO = (MessageSchema) => {
+    static getMessageDAO = () => {
         switch (config.MESSAGE_PERSISTENCE) {
             case 'MongoDB':
-                const MongoDBDAO = require('../DAOs/MongoDBDAO')
-                return new MongoDBDAO(MessageSchema)
+                return require('../DAOs/MongoDBDAO')
             default:
                 logger.error(`Fatal error: please adjust PRODUCT_PERSISTENCE environment variable to match a supported persistence mechanism.`)
         }

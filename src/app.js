@@ -4,12 +4,6 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const { infoLogger, warningLogger } = require('../logs')
 
-// mongoDB connection
-const MongoDBConnection = require('./db/mongoDB')
-MongoDBConnection.connect()
-    .then(() => console.log('Successfully connected to database.'))
-    .catch((err) => console.log(`Could not connect to database. Error: ${err}`))
-
 // Session import
 const session = require('express-session')
 const sessionConfig = require('./middlewares/sessions/sessionConfig')

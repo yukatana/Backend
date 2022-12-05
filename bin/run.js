@@ -1,10 +1,13 @@
 const { MODE } = require('../src/config')
 const cluster = require('cluster')
 const { cpus } = require('os')
-const config = require("../src/config")
+const config = require('../src/config')
 const app = require('../src/app')
 const { Server } = require('http')
 const http = new Server(app)
+
+// Database connections
+require('../src/db')()
 
 // Initializing modular websocket listener with http server as argument
 require('../src/websocket/socketListener')(http)

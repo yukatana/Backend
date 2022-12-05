@@ -1,13 +1,13 @@
 const logger = require('../../logs')
 
 class MongoDBDAO {
-    constructor(Schema) {
-        this.Schema = Schema
+    constructor(Model) {
+        this.Model = Model
     }
 
     getAll = async () => { //returns all messages
         try {
-            return await this.Schema.find()
+            return await this.Model.find()
         } catch (err) {
             logger.error(err)
         }
@@ -15,7 +15,7 @@ class MongoDBDAO {
 
     save = async (object) => {
         try {
-            return await new this.Schema(object).save()
+            return await new this.Model(object).save()
         } catch (err) {
             logger.error(err)
         }

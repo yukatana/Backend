@@ -2,15 +2,19 @@
 const {Server: SocketServer} = require("socket.io")
 const events = require("./socketEvents")
 
-// Container imports for data persistence in mongoDB
-const ProductContainer = require('../utils/mongoDBProductsContainer')
-const MessageContainer = require('../utils/mongoDBMessagesContainer')
+// Factory import and DAO fetching
+const factory = require('../factories/DAOFactory')
+const ProductDAO = factory.getProductDAO()
+const MessageDAO = factory.getMessageDAO()
 
-// Importing mongoose schemas and container instantiation
+// Repository import for data processing
+const MesssageRepository = require('../repositories/messageRepository')
+
+// Importing mongoose schemas and DAO instantiation
 const Product = require('../db/mongoDB/schemas/product')
 const Message = require('../db/mongoDB/schemas/message')
-const productContainer = new ProductContainer(Product)
-const messageContainer = new MessageContainer(Message)
+const productDAO = new ProductDAO(Product)
+const messageDAO = new MessageDAO(Message)
 
 module.exports = socketListener = (httpServer) => {
     const socketServer = new SocketServer(httpServer)
@@ -18,21 +22,22 @@ module.exports = socketListener = (httpServer) => {
     socketServer.on('connection',  async (socket) => {
         console.log('A new client has connected')
 
-        let products = await productContainer.getAll()
+        let products = await productDAO.getAll()
         socketServer.emit(events.PRODUCTS_INIT, products)
 
-        let normalizedMessages = await messageContainer.getAll()
-        socketServer.emit(events.MSGS_INIT, normalizedMessages)
+        let normalizedMessages = await messageDAO.getAll()
+        let processedNormalizedMessages = MesssageRepository.processAllMessages(normalizedMessages)
+        socketServer.emit(events.MSGS_INIT, processedNormalizedMessages)
 
         socket.on(events.POST_PRODUCT, async (product) => {
             console.log(product)
-            await productContainer.save(product)
+            await productDAO.save(product)
             socketServer.sockets.emit(events.NEW_PRODUCT, product)
         })
 
         socket.on(events.POST_MESSAGE, async (msg) => {
             console.log(msg)
-            await messageContainer.save(msg)
+            await messageDAO.save(msg)
             socketServer.sockets.emit(events.NEW_MESSAGE, msg)
         })
     } )
