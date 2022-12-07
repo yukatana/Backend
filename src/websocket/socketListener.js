@@ -8,7 +8,7 @@ const ProductDAO = factory.getProductDAO()
 const MessageDAO = factory.getMessageDAO()
 
 // Repository import for data processing
-const MesssageRepository = require('../repositories/messageRepository')
+const MessageRepository = require('../repositories/messageRepository')
 
 // Importing mongoose schemas and DAO instantiation
 const Product = require('../db/mongoDB/schemas/product')
@@ -26,7 +26,7 @@ module.exports = socketListener = (httpServer) => {
         socketServer.emit(events.PRODUCTS_INIT, products)
 
         let normalizedMessages = await messageDAO.getAll()
-        let processedNormalizedMessages = MesssageRepository.processAllMessages(normalizedMessages)
+        let processedNormalizedMessages = MessageRepository.processAllMessages(normalizedMessages)
         socketServer.emit(events.MSGS_INIT, processedNormalizedMessages)
 
         socket.on(events.POST_PRODUCT, async (product) => {

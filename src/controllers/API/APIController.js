@@ -1,4 +1,4 @@
-const numberGenerator = require('../../src/utils/numberGenerator')
+const numberGenerator = require('../../utils/numberGenerator')
 
 const generateRandoms = (req, res) => {
     numberGenerator(req.query.qty || 10e8)
