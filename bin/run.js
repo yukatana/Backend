@@ -1,3 +1,4 @@
+const { logger } = require('../logs')
 const { MODE } = require('../src/config')
 const cluster = require('cluster')
 const { cpus } = require('os')
@@ -13,14 +14,14 @@ require('../src/db')()
 require('../src/websocket/socketListener')(http)
 
 if (MODE === 'cluster' && cluster.isPrimary) {
-    console.log(`Started master process with PID: ${process.pid}`)
+    logger.info(`Started master process with PID: ${process.pid}`)
     //Forking a worker for each core
     for (let i = 0; i < cpus().length; i++) {
         cluster.fork()
     }
 
     cluster.on('exit', worker => {
-        console.log(`Worker PID: ${worker.process.pid} has died. Spawning new worker...`)
+        logger.warn(`Worker PID: ${worker.process.pid} has died. Spawning new worker...`)
         cluster.fork()
     })
 } else {
@@ -28,8 +29,8 @@ if (MODE === 'cluster' && cluster.isPrimary) {
     const PORT = config.PORT
 
     http.listen(PORT, () => {
-        console.log(`HTTP server listening on port ${PORT} - PID: ${process.pid}`)
+        logger.info(`HTTP server listening on port ${PORT} - PID: ${process.pid}`)
     })
 
-    http.on('error', error => console.log(`HTTP server error: ${error}`))
+    http.on('error', error => logger.error(`HTTP server error: ${error}`))
 }

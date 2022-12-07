@@ -1,8 +1,15 @@
 //Setting up Winston to log all incoming requests to the console, and warnings and errors to log files
 const winston = require('winston')
+const { combine, timestamp, errors, colorize, prettyPrint } = winston.format
 
 const logger = winston.createLogger({
     level: 'info',
+    format: combine(
+        errors({ stack: true }),
+        colorize(),
+        timestamp(),
+        prettyPrint()
+    ),
     transports: [
         new winston.transports.Console({level: 'info'}),
         new winston.transports.File({filename: 'logs/warn.log', level: 'warn'}),

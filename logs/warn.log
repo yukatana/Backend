@@ -236,3 +236,136 @@
 {"level":"error"}
 {"level":"error","message":"TypeError: ProductDAO.getAll is not a function\n    at getProduct (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\src\\controllers\\API\\productsController.js:12:76)\n    at Layer.handle [as handle_request] (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\route.js:144:13)\n    at Route.dispatch (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\route.js:114:3)\n    at Layer.handle [as handle_request] (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:284:15\n    at param (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:365:14)\n    at param (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:376:14)\n    at Function.process_params (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:421:3)\n    at next (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:280:10)"}
 {"level":"error"}
+{
+  messageFormat: undefined,
+  stringValue: '"63212b38543e2ab850"',
+  kind: 'ObjectId',
+  value: '63212b38543e2ab850',
+  path: '_id',
+  reason: BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+      at new BSONTypeError (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\bson\lib\error.js:41:28)
+      at new ObjectId (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\bson\lib\objectid.js:67:23)
+      at castObjectId (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\cast\objectid.js:25:12)
+      at ObjectId.cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schema\objectid.js:246:12)
+      at ObjectId.SchemaType.applySetters (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1201:12)
+      at ObjectId.SchemaType._castForQuery (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1648:15)
+      at ObjectId.SchemaType.castForQuery (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1636:15)
+      at ObjectId.SchemaType.castForQueryWrapper (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\cast.js:347:32)
+      at model.Query.Query.cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\query.js:5312:12),
+  valueType: 'string',
+  level: '\x1B[31merror\x1B[39m',
+  message: 'Cast to ObjectId failed for value "63212b38543e2ab850" (type string) at path "_id" for model "products"',
+  stack: 'CastError: Cast to ObjectId failed for value "63212b38543e2ab850" (type string) at path "_id" for model "products"\n' +
+    '    at model.Query.exec (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4884:21)\n' +
+    '    at model.Query.Query.then (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4983:15)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-12-07T18:43:47.789Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"63212b38543e2ab850"',
+  kind: 'ObjectId',
+  value: '63212b38543e2ab850',
+  path: '_id',
+  reason: BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+      at new BSONTypeError (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\bson\lib\error.js:41:28)
+      at new ObjectId (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\bson\lib\objectid.js:67:23)
+      at castObjectId (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\cast\objectid.js:25:12)
+      at ObjectId.cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schema\objectid.js:246:12)
+      at ObjectId.SchemaType.applySetters (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1201:12)
+      at ObjectId.SchemaType._castForQuery (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1648:15)
+      at ObjectId.SchemaType.castForQuery (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1636:15)
+      at ObjectId.SchemaType.castForQueryWrapper (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\cast.js:347:32)
+      at model.Query.Query.cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\query.js:5312:12),
+  valueType: 'string',
+  level: '\x1B[31merror\x1B[39m',
+  message: 'Cast to ObjectId failed for value "63212b38543e2ab850" (type string) at path "_id" for model "products"',
+  stack: 'CastError: Cast to ObjectId failed for value "63212b38543e2ab850" (type string) at path "_id" for model "products"\n' +
+    '    at model.Query.exec (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4884:21)\n' +
+    '    at model.Query.Query.then (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4983:15)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-12-07T19:01:52.271Z'
+}
+{
+  messageFormat: undefined,
+  stringValue: '"63212b38543e2ab850"',
+  kind: 'ObjectId',
+  value: '63212b38543e2ab850',
+  path: '_id',
+  reason: BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+      at new BSONTypeError (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\bson\lib\error.js:41:28)
+      at new ObjectId (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\bson\lib\objectid.js:67:23)
+      at castObjectId (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\cast\objectid.js:25:12)
+      at ObjectId.cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schema\objectid.js:246:12)
+      at ObjectId.SchemaType.applySetters (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1201:12)
+      at ObjectId.SchemaType._castForQuery (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1648:15)
+      at ObjectId.SchemaType.castForQuery (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1636:15)
+      at ObjectId.SchemaType.castForQueryWrapper (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\schematype.js:1612:20)
+      at cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\cast.js:347:32)
+      at model.Query.Query.cast (C:\Users\raranguren\Desktop\backend-portfolio\node_modules\mongoose\lib\query.js:5312:12),
+  valueType: 'string',
+  level: '\x1B[31merror\x1B[39m',
+  message: 'Cast to ObjectId failed for value "63212b38543e2ab850" (type string) at path "_id" for model "products"',
+  stack: 'CastError: Cast to ObjectId failed for value "63212b38543e2ab850" (type string) at path "_id" for model "products"\n' +
+    '    at model.Query.exec (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4884:21)\n' +
+    '    at model.Query.Query.then (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4983:15)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-12-07T19:01:56.389Z'
+}
+{
+  level: '\x1B[31merror\x1B[39m',
+  message: 'Invalid MongoDB ObjectID. Please retry with a valid ID.',
+  stack: 'Error: Invalid MongoDB ObjectID. Please retry with a valid ID.\n' +
+    '    at MongoDBDAO.getById (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\src\\DAOs\\MongoDBDAO.js:20:19)\n' +
+    '    at getProduct (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\src\\controllers\\API\\productsController.js:12:38)\n' +
+    '    at Layer.handle [as handle_request] (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+    '    at next (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\route.js:144:13)\n' +
+    '    at Route.dispatch (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\route.js:114:3)\n' +
+    '    at Layer.handle [as handle_request] (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\layer.js:95:5)\n' +
+    '    at C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:284:15\n' +
+    '    at param (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:365:14)\n' +
+    '    at param (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:376:14)\n' +
+    '    at Function.process_params (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\router\\index.js:421:3)',
+  timestamp: '2022-12-07T19:05:26.957Z'
+}
+{
+  errno: undefined,
+  code: 'ESERVFAIL',
+  syscall: 'querySrv',
+  hostname: '_mongodb._tcp.yukatana.la8n0bl.mongodb.net',
+  level: '\x1B[31merror\x1B[39m',
+  message: 'querySrv ESERVFAIL _mongodb._tcp.yukatana.la8n0bl.mongodb.net',
+  stack: 'Error: querySrv ESERVFAIL _mongodb._tcp.yukatana.la8n0bl.mongodb.net\n' +
+    '    at QueryReqWrap.onresolve [as oncomplete] (node:dns:279:19)',
+  timestamp: '2022-12-07T19:06:23.117Z'
+}
+{
+  code: 'ERR_HTTP_HEADERS_SENT',
+  level: '\x1B[31merror\x1B[39m',
+  message: 'Cannot set headers after they are sent to the client',
+  stack: 'Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n' +
+    '    at new NodeError (node:internal/errors:387:5)\n' +
+    '    at ServerResponse.setHeader (node:_http_outgoing:644:11)\n' +
+    '    at ServerResponse.header (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\response.js:794:10)\n' +
+    '    at ServerResponse.send (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\response.js:174:12)\n' +
+    '    at ServerResponse.json (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\response.js:278:15)\n' +
+    '    at getProduct (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\src\\controllers\\API\\productsController.js:17:25)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-12-07T19:12:54.549Z'
+}
+{
+  code: 'ERR_HTTP_HEADERS_SENT',
+  level: '\x1B[31merror\x1B[39m',
+  message: 'Cannot set headers after they are sent to the client',
+  stack: 'Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n' +
+    '    at new NodeError (node:internal/errors:387:5)\n' +
+    '    at ServerResponse.setHeader (node:_http_outgoing:644:11)\n' +
+    '    at ServerResponse.header (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\response.js:794:10)\n' +
+    '    at ServerResponse.send (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\response.js:174:12)\n' +
+    '    at ServerResponse.json (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\node_modules\\express\\lib\\response.js:278:15)\n' +
+    '    at getProduct (C:\\Users\\raranguren\\Desktop\\backend-portfolio\\src\\controllers\\API\\productsController.js:17:25)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-12-07T19:15:17.399Z'
+}

@@ -1,4 +1,5 @@
 const { logger } = require('../../logs')
+const { Types } = require('mongoose')
 
 class MongoDBDAO {
     constructor(Model) {
@@ -15,6 +16,9 @@ class MongoDBDAO {
     }
 
     getById = async (id) => {
+        if (!Types.ObjectId.isValid(id)) {
+            return false
+        }
         try {
             return await this.Model.findById(id)
         } catch (err) {
@@ -33,6 +37,9 @@ class MongoDBDAO {
     }
 
     update = async (id, update) => {
+        if (!Types.ObjectId.isValid(id)) {
+            return false
+        }
         try {
             return await this.Model.findByIdAndUpdate(id, update)
         } catch (err) {
@@ -42,6 +49,9 @@ class MongoDBDAO {
     }
 
     delete = async (id) => {
+        if (!Types.ObjectId.isValid(id)) {
+            return false
+        }
         try {
             return await this.Model.findByIdAndDelete(id)
         } catch (err) {
