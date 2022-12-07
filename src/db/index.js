@@ -6,8 +6,8 @@ const ConnectToDatabases = () => {
         config.PRODUCT_PERSISTENCE === 'MongoDB') {
         const MongoDBConnection = require('./mongoDB')
         MongoDBConnection.connect()
-            .then(() => console.log('Successfully connected to database.'))
-            .catch((err) => console.log(`Could not connect to database. Error: ${err}`))
+            .then(() => console.log('Successfully connected to MongoDB database.'))
+            .catch((err) => console.log(`Could not connect to MongoDB database. Error: ${err}`))
     }
 }
 

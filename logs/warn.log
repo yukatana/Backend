@@ -217,3 +217,4 @@
 {"level":"warn","message":"Bad GET request received for non-existing route /sample"}
 {"level":"warn","message":"Bad GET request received for non-existing route /sample"}
 {"level":"warn","message":"Bad GET request received for non-existing route /dasd"}
+{"level":"warn","message":"Bad GET request received for non-existing route /favicon.ico"}
