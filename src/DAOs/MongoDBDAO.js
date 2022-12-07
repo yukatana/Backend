@@ -1,4 +1,4 @@
-const logger = require('../../logs')
+const { logger } = require('../../logs')
 
 class MongoDBDAO {
     constructor(Model) {

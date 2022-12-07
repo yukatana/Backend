@@ -10,7 +10,7 @@ passport.use('signup', new LocalStrategy(
 
 // Types and User schema to be used by deserialize
 const { Types } = require('mongoose')
-const User = require('../../db/mongoDB/schemas/user')
+const User = require('../../db/mongoDB/models/user')
 passport.serializeUser((user, done) => {
     done(null, user._id)
 })

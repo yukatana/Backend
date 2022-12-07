@@ -1,4 +1,4 @@
-const logger = require('../../../logs')
+const { logger } = require('../../../logs')
 
 // Factory import and DAO fetching
 const factory = require('../../factories/DAOFactory')
@@ -29,7 +29,6 @@ const postProduct = async (req, res) => {
         logger.error(err)
         res.status(500).json({error: 'There was a server error while processing your request.'})
     }
-
 }
 
 const updateProduct = async (req, res) => {
