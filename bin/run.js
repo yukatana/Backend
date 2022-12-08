@@ -8,7 +8,7 @@ const { Server } = require('http')
 const http = new Server(app)
 
 // Database connections
-require('../src/db')()
+require('../src/databases')()
 
 // Initializing modular websocket listener with http server as argument
 require('../src/websocket/socketListener')(http)

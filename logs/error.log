@@ -135,3 +135,18 @@
     '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
   timestamp: '2022-12-07T19:15:17.399Z'
 }
+{
+  message: 'Fatal error: please adjust PRODUCT_PERSISTENCE environment variable to match a supported persistence mechanism.',
+  level: '\x1B[31merror\x1B[39m',
+  timestamp: '2022-12-08T13:26:40.150Z'
+}
+{
+  message: 'Fatal error: please adjust PRODUCT_PERSISTENCE environment variable to match a supported persistence mechanism.',
+  level: '\x1B[31merror\x1B[39m',
+  timestamp: '2022-12-08T13:26:46.404Z'
+}
+{
+  message: 'Fatal error: please adjust PRODUCT_PERSISTENCE environment variable to match a supported persistence mechanism.',
+  level: '\x1B[31merror\x1B[39m',
+  timestamp: '2022-12-08T13:26:46.405Z'
+}

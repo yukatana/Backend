@@ -12,7 +12,7 @@ class DAOFactory {
                     return this.ProductDAO
                 }
                 const MongoDBDAO = require('../DAOs/MongoDBDAO')
-                const productModel = require('../db/mongoDB/models/product')
+                const productModel = require('../databases/mongoDB/models/product')
                 this.ProductDAO = new MongoDBDAO(productModel)
                 return this.ProductDAO
             default:
@@ -27,7 +27,7 @@ class DAOFactory {
                     return this.MessageDAO
                 }
                 const MongoDBDAO = require('../DAOs/MongoDBDAO')
-                const messageModel = require('../db/mongoDB/models/message')
+                const messageModel = require('../databases/mongoDB/models/message')
                 this.MessageDAO = new MongoDBDAO(messageModel)
                 return this.MessageDAO
             default:

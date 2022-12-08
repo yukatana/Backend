@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const authRouter = Router()
-const authController = require('../../controllers/authController')
+const authController = require('../../API/controllers/authController')
 const { passportLogin, passportSignup } = require('../../middlewares/auth/passport')
 
 //GET login page

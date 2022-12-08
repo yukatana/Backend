@@ -1,4 +1,4 @@
-const productGenerator = require('../utils/productGenerator')
+const productGenerator = require('../../utils/productGenerator')
 
 const generateRandoms = (req, res) => {
     let testProducts = productGenerator(5)

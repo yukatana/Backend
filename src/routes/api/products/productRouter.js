@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const ProductsRouter = Router()
 const checkAuthentication = require('../../../middlewares/auth/checkAuthentication')
-const productsController = require('../../../controllers/API/productsController')
+const productsController = require('../../../API/productsController')
 
 // GET a product or all products
 ProductsRouter.get('/:id?', productsController.getProduct)

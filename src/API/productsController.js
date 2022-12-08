@@ -1,7 +1,7 @@
-const { logger } = require('../../../logs')
+const { logger } = require('../../logs')
 
 // Factory import and DAO fetching
-const factory = require('../../factories/DAOFactory')
+const factory = require('../factories/DAOFactory')
 const ProductDAO = factory.getProductDAO()
 
 const getProduct = async (req, res) => {
