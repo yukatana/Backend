@@ -384,3 +384,78 @@
   level: '\x1B[31merror\x1B[39m',
   timestamp: '2022-12-08T13:26:46.405Z'
 }
+{
+  message: 'Bad GET request received for non-existing route /auth/login/css/styles.css',
+  level: 'warn',
+  timestamp: '2022-12-11T16:54:07.542Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /auth/login/js/main.js',
+  level: 'warn',
+  timestamp: '2022-12-11T16:54:07.546Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T16:54:25.216Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T16:55:39.303Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /auth/css/styles.css',
+  level: 'warn',
+  timestamp: '2022-12-11T16:55:40.385Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:29:53.859Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:32:20.963Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:32:36.902Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:33:07.853Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:40:57.732Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:43:08.910Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:44:16.460Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:44:26.703Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:45:07.580Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:45:29.834Z'
+}

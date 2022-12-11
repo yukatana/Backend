@@ -12,7 +12,8 @@
     "prof": "node --prof bin/run.js",
     "inspect": "node --inspect bin/run.js",
     "autocannon": "autocannon http://localhost:8080/info -c 100 -d 20",
-    "artillery": "artillery quick --count 50 -n 20 http://localhost:8080/info > artillery_result_with_log.txt"
+    "artillery": "artillery quick --count 50 -n 20 http://localhost:8080/info > artillery_result_with_log.txt",
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
@@ -38,6 +39,9 @@
   },
   "devDependencies": {
     "autocannon": "^7.10.0",
-    "nodemon": "^2.0.19"
+    "chai": "^4.3.7",
+    "mocha": "^10.1.0",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.3.3"
   }
 }
