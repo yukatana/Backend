@@ -17,7 +17,7 @@ const editProduct = async () => {
     const update = {
         price: 1000
     }
-    const response = await axiosInstance.put(`${BASE_URL}/api/products/${TEST_UPDATE_PRODUCT_ID}`, update)
+    const response = await axiosInstance.put(`/api/products/${TEST_UPDATE_PRODUCT_ID}`, update)
     logger.info(response.data)
 }
 

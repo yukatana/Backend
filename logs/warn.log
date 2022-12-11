@@ -459,3 +459,58 @@
   level: 'warn',
   timestamp: '2022-12-11T17:45:29.834Z'
 }
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:50:55.012Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:51:03.111Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T17:51:17.511Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:11:15.167Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:14:39.248Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:15:59.122Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:16:32.403Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:17:32.103Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:27:03.504Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:31:39.703Z'
+}
+{
+  message: 'Bad GET request received for non-existing route /dasd',
+  level: 'warn',
+  timestamp: '2022-12-11T18:38:29.666Z'
+}
