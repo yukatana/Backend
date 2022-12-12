@@ -39,9 +39,11 @@
   },
   "devDependencies": {
     "autocannon": "^7.10.0",
+    "axios-cookiejar-support": "^4.0.3",
     "chai": "^4.3.7",
     "mocha": "^10.1.0",
     "nodemon": "^2.0.19",
-    "supertest": "^6.3.3"
+    "supertest": "^6.3.3",
+    "tough-cookie": "^4.1.2"
   }
 }
