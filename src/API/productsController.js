@@ -37,7 +37,7 @@ const postProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     const id = req.params.id
-    const update = req.params.body
+    const update = req.body
     if (!id || !update) {
         return res.status(400).json({error: 'Please, re-submit your request with the proper fields.'})
     }

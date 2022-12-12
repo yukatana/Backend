@@ -41,7 +41,7 @@ class MongoDBDAO {
             return false
         }
         try {
-            return await this.Model.findByIdAndUpdate(id, update)
+            return await this.Model.findByIdAndUpdate(id, update, {returnDocument: 'after'})
         } catch (err) {
             logger.error(err)
             return err

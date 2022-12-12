@@ -11,8 +11,9 @@ const createSession = async () => {
     }
     const logIn = await axios.post(`${BASE_URL}/auth/login`, testCredentials)
     // Adding session cookie to instance to be able to post to protected endpoint
-    axiosInstance.defaults.headers.Cookie = logIn.headers["set-cookie"][0]
+    axiosInstance.defaults.headers.Cookie = logIn.headers['set-cookie'][0]
     logger.info(axiosInstance.defaults.headers.Cookie)
+    logger.info(logIn)
 }
 
 const addProduct = async () => {

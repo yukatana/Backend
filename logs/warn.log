@@ -514,3 +514,131 @@
   level: 'warn',
   timestamp: '2022-12-11T18:38:29.666Z'
 }
+{
+  message: "Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/",
+  reason: TopologyDescription {
+    type: 'ReplicaSetNoPrimary',
+    servers: Map(3) {
+      'ac-b86pscc-shard-00-01.la8n0bl.mongodb.net:27017' => ServerDescription {
+        address: 'ac-b86pscc-shard-00-01.la8n0bl.mongodb.net:27017',
+        type: 'Unknown',
+        hosts: [],
+        passives: [],
+        arbiters: [],
+        tags: {},
+        minWireVersion: 0,
+        maxWireVersion: 0,
+        roundTripTime: -1,
+        lastUpdateTime: 2137366589,
+        lastWriteDate: 0,
+        error: MongoNetworkError: getaddrinfo ENOTFOUND ac-b86pscc-shard-00-01.la8n0bl.mongodb.net
+            at connectionFailureError (C:\Users\romme\Desktop\backend-portfolio\node_modules\mongodb\lib\cmap\connect.js:387:20)
+            at TLSSocket.<anonymous> (C:\Users\romme\Desktop\backend-portfolio\node_modules\mongodb\lib\cmap\connect.js:310:22)
+            at Object.onceWrapper (node:events:642:26)
+            at TLSSocket.emit (node:events:527:28)
+            at emitErrorNT (node:internal/streams/destroy:164:8)
+            at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+            at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+          [Symbol(errorLabels)]: Set(0) {}
+        },
+        topologyVersion: null,
+        setName: null,
+        setVersion: null,
+        electionId: null,
+        logicalSessionTimeoutMinutes: null,
+        primary: null,
+        me: null,
+        '$clusterTime': null
+      },
+      'ac-b86pscc-shard-00-02.la8n0bl.mongodb.net:27017' => ServerDescription {
+        address: 'ac-b86pscc-shard-00-02.la8n0bl.mongodb.net:27017',
+        type: 'Unknown',
+        hosts: [],
+        passives: [],
+        arbiters: [],
+        tags: {},
+        minWireVersion: 0,
+        maxWireVersion: 0,
+        roundTripTime: -1,
+        lastUpdateTime: 2137366590,
+        lastWriteDate: 0,
+        error: MongoNetworkError: getaddrinfo ENOTFOUND ac-b86pscc-shard-00-02.la8n0bl.mongodb.net
+            at connectionFailureError (C:\Users\romme\Desktop\backend-portfolio\node_modules\mongodb\lib\cmap\connect.js:387:20)
+            at TLSSocket.<anonymous> (C:\Users\romme\Desktop\backend-portfolio\node_modules\mongodb\lib\cmap\connect.js:310:22)
+            at Object.onceWrapper (node:events:642:26)
+            at TLSSocket.emit (node:events:527:28)
+            at emitErrorNT (node:internal/streams/destroy:164:8)
+            at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+            at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+          [Symbol(errorLabels)]: Set(0) {}
+        },
+        topologyVersion: null,
+        setName: null,
+        setVersion: null,
+        electionId: null,
+        logicalSessionTimeoutMinutes: null,
+        primary: null,
+        me: null,
+        '$clusterTime': null
+      },
+      'ac-b86pscc-shard-00-00.la8n0bl.mongodb.net:27017' => ServerDescription {
+        address: 'ac-b86pscc-shard-00-00.la8n0bl.mongodb.net:27017',
+        type: 'Unknown',
+        hosts: [],
+        passives: [],
+        arbiters: [],
+        tags: {},
+        minWireVersion: 0,
+        maxWireVersion: 0,
+        roundTripTime: -1,
+        lastUpdateTime: 2137366590,
+        lastWriteDate: 0,
+        error: MongoNetworkError: getaddrinfo ENOTFOUND ac-b86pscc-shard-00-00.la8n0bl.mongodb.net
+            at connectionFailureError (C:\Users\romme\Desktop\backend-portfolio\node_modules\mongodb\lib\cmap\connect.js:387:20)
+            at TLSSocket.<anonymous> (C:\Users\romme\Desktop\backend-portfolio\node_modules\mongodb\lib\cmap\connect.js:310:22)
+            at Object.onceWrapper (node:events:642:26)
+            at TLSSocket.emit (node:events:527:28)
+            at emitErrorNT (node:internal/streams/destroy:164:8)
+            at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+            at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+          [Symbol(errorLabels)]: Set(0) {}
+        },
+        topologyVersion: null,
+        setName: null,
+        setVersion: null,
+        electionId: null,
+        logicalSessionTimeoutMinutes: null,
+        primary: null,
+        me: null,
+        '$clusterTime': null
+      }
+    },
+    stale: false,
+    compatible: true,
+    heartbeatFrequencyMS: 10000,
+    localThresholdMS: 15,
+    setName: 'atlas-127wzv-shard-0',
+    maxElectionId: new ObjectId("7fffffff0000000000000168"),
+    maxSetVersion: 7,
+    commonWireVersion: 0,
+    logicalSessionTimeoutMinutes: null
+  },
+  code: undefined,
+  level: 'error',
+  stack: "MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/\n" +
+    '    at Function.Model.$wrapCallback (C:\\Users\\romme\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\model.js:5192:32)\n' +
+    '    at C:\\Users\\romme\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4901:21\n' +
+    '    at C:\\Users\\romme\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\helpers\\promiseOrCallback.js:41:5\n' +
+    '    at new Promise (<anonymous>)\n' +
+    '    at promiseOrCallback (C:\\Users\\romme\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\helpers\\promiseOrCallback.js:40:10)\n' +
+    '    at model.Query.exec (C:\\Users\\romme\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4900:10)\n' +
+    '    at model.Query.Query.then (C:\\Users\\romme\\Desktop\\backend-portfolio\\node_modules\\mongoose\\lib\\query.js:4983:15)\n' +
+    '    at runMicrotasks (<anonymous>)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:96:5)',
+  timestamp: '2022-12-11T21:50:43.930Z'
+}
+{
+  message: 'HTTP server error: Error: listen EADDRINUSE: address already in use :::8080',
+  level: 'error',
+  timestamp: '2022-12-12T00:33:35.865Z'
+}
