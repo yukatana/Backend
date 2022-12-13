@@ -30,12 +30,15 @@ const APIRouter = require('./routes/api/APIRouter')
 const authRouter = require('./routes/auth/authRouter')
 const testRouter = require('./routes/test/testRouter')
 const infoRouter = require('./routes/info/infoRouter')
+const graphqlRouter = require('./routes/graphql/graphqlRouter')
+
 // Router implementation
 app.use('/', homeRouter)
 app.use('/api', APIRouter)
 app.use('/auth', authRouter)
 app.use('/test', testRouter)
 app.use('/info', infoRouter)
+app.use('/graphql', graphqlRouter)
 app.use(express.static(process.cwd() + '/public'))
 
 //Warn logger middleware records all wrong-path requests to logs/warn.log file
